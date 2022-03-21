@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
             val dataAvatar = resources.obtainTypedArray(R.array.avatar)
             val listHero = ArrayList<User2>()
             for (i in dataName.indices) {
-                //val hero = User(dataName[i],dataDescription[i], dataPhoto.getResourceId(i, -1))
                 val hero = User2(dataUsername[i], dataName[i], dataLocation[i], dataRepository.getResourceId(i, -1), dataCompany[i], dataFollowers.getResourceId(i, -1),  dataFollowing.getResourceId(i, -1), dataAvatar.getResourceId(i, -1))
                 listHero.add(hero)
         }
@@ -64,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                     "academy@dicoding.com",
                     33,
                     44,
-                    2
+                    1
                 )
 
                 //val datauser = User2(data)

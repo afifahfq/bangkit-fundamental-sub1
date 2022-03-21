@@ -2,6 +2,7 @@ package com.example.githubuser
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 
 class DetailUser : AppCompatActivity() {
@@ -14,9 +15,12 @@ class DetailUser : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_user)
 
+        val imageObject: ImageView = findViewById(R.id.imageView)
         val tvObject: TextView = findViewById(R.id.tv_object_received)
 
         val user = intent.getParcelableExtra<User2>(EXTRA_USER) as User2
+        val img = "${user.avatar}"
+        //imageObject.drawable = img
         val text = "Username : ${user.username},\nName : ${user.name},\nLocation : ${user.location},\nRepository : ${user.repository}"
         tvObject.text = text
     }
