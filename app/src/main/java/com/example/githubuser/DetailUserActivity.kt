@@ -2,13 +2,12 @@ package com.example.githubuser
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.StringRes
 import com.bumptech.glide.Glide
 
 class DetailUser : AppCompatActivity() {
-
     companion object {
         const val EXTRA_USER = "extra_user"
     }
@@ -17,6 +16,18 @@ class DetailUser : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_user)
         setTitle("Detail User");
+
+        val mFragmentManager = supportFragmentManager
+        val mHomeFragment = TabbedFragment()
+        val fragment = supportFragmentManager.findFragmentByTag(TabbedFragment::class.java.simpleName)
+
+        if (fragment !is TabbedFragment) {
+            Log.d("MyFlexibleFragment", "Fragment Name :" + TabbedFragment::class.java.simpleName)
+            mFragmentManager
+                .beginTransaction()
+                .add(R.id.frame_container, mHomeFragment, TabbedFragment::class.java.simpleName)
+                .commit()
+        }
 
         val imageObject: ImageView = findViewById(R.id.imageView)
         val nameObject: TextView = findViewById(R.id.name_object)
@@ -42,5 +53,6 @@ class DetailUser : AppCompatActivity() {
 
         val location = "Location : ${user.location}"
         locationObject.text = location
+
     }
 }
