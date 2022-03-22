@@ -4,6 +4,8 @@
     <string name="users_name">Nama Pahlawan</string>
     <string name="description">Deskripsi</string>
     <string name="object_received" />
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
 
     <string-array name="username">
         <item>JakeWharton</item>

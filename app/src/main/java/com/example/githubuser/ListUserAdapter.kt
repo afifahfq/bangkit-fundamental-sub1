@@ -28,7 +28,7 @@ class ListUserAdapter(private val listUsers: ArrayList<User>): RecyclerView.Adap
             .into(holder.imgPhoto);
 
         holder.tvUsername.text = name
-        holder.tvName.text = username
+        holder.tvName.text = company
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listUsers[holder.adapterPosition])
         }

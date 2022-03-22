@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,14 +28,14 @@ class MainActivity : AppCompatActivity() {
             val dataUsername = resources.getStringArray(R.array.username)
             val dataName = resources.getStringArray(R.array.name)
             val dataLocation = resources.getStringArray(R.array.location)
-            val dataRepository = resources.obtainTypedArray(R.array.repository)
+            val dataRepository = resources.getStringArray(R.array.repository)
             val dataCompany = resources.getStringArray(R.array.company)
-            val dataFollowers = resources.obtainTypedArray(R.array.followers)
-            val dataFollowing = resources.obtainTypedArray(R.array.following)
+            val dataFollowers = resources.getStringArray(R.array.followers)
+            val dataFollowing = resources.getStringArray(R.array.following)
             val dataAvatar = resources.obtainTypedArray(R.array.avatar)
             val listUser = ArrayList<User>()
             for (i in dataName.indices) {
-                val user = User(dataUsername[i], dataName[i], dataLocation[i], dataRepository.getResourceId(i, -1), dataCompany[i], dataFollowers.getResourceId(i, -1),  dataFollowing.getResourceId(i, -1), dataAvatar.getResourceId(i, -1))
+                val user = User(dataUsername[i], dataName[i], dataLocation[i], dataRepository[i], dataCompany[i], dataFollowers[i],  dataFollowing[i], dataAvatar.getResourceId(i, -1))
                 listUser.add(user)
         }
         return listUser
@@ -54,18 +53,6 @@ class MainActivity : AppCompatActivity() {
 
         listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: User) {
-                val user = User(
-                    "DicodingAcademy",
-                    "name",
-                    "location",
-                    5,
-                    "academy@dicoding.com",
-                    33,
-                    44,
-                    1
-                )
-
-                //val datauser = User(data)
 
                 val DetailUserIntent = Intent(this@MainActivity, DetailUser::class.java)
                 DetailUserIntent.putExtra(DetailUser.EXTRA_USER, data)

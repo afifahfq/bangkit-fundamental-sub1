@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.StringRes
 import com.bumptech.glide.Glide
 
 class DetailUser : AppCompatActivity() {
@@ -23,6 +22,9 @@ class DetailUser : AppCompatActivity() {
         val usernameObject: TextView = findViewById(R.id.username_object)
         val companyObject: TextView = findViewById(R.id.company_object)
         val locationObject: TextView = findViewById(R.id.location_object)
+        val repositoryObject: TextView = findViewById(R.id.repository_object)
+        val followersObject: TextView = findViewById(R.id.follower_object)
+        val followingObject: TextView = findViewById(R.id.following_object)
 
         val user = intent.getParcelableExtra<User>(EXTRA_USER) as User
 
@@ -42,5 +44,14 @@ class DetailUser : AppCompatActivity() {
 
         val location = "Location : ${user.location}"
         locationObject.text = location
+
+        val repository = "Repository : ${user.repository}"
+        repositoryObject.text = repository
+
+        val followers = "${user.followers}"
+        followersObject.text = followers
+
+        val following = "${user.following}"
+        followingObject.text = following
     }
 }

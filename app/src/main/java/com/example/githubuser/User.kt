@@ -7,20 +7,20 @@ data class User(
     val username: String?,
     val name: String?,
     val location: String?,
-    val repository: Int?,
+    val repository: String?,
     val company: String?,
-    val followers: Int?,
-    val following: Int?,
+    val followers: String?,
+    val following: String?,
     val avatar: Int?
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
-        parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int
     ) {
     }
@@ -29,10 +29,10 @@ data class User(
         parcel.writeString(username)
         parcel.writeString(name)
         parcel.writeString(location)
-        parcel.writeValue(repository)
+        parcel.writeString(repository)
         parcel.writeString(company)
-        parcel.writeValue(followers)
-        parcel.writeValue(following)
+        parcel.writeString(followers)
+        parcel.writeString(following)
         parcel.writeValue(avatar)
     }
 
