@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailUser">
+    tools:context=".DetailUserActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -21,6 +21,7 @@
 
         <ImageView
             android:id="@+id/imageView"
+            android:contentDescription="avatar"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="20dp"
@@ -123,6 +124,7 @@
 
         <ImageView
             android:id="@+id/imageView2"
+            android:contentDescription="company"
             android:layout_width="28dp"
             android:layout_height="19dp"
             android:layout_marginTop="15dp"
@@ -142,6 +144,7 @@
 
         <ImageView
             android:id="@+id/imageView3"
+            android:contentDescription="location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -162,6 +165,7 @@
 
         <ImageView
             android:id="@+id/imageView4"
+            android:contentDescription="repository"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"

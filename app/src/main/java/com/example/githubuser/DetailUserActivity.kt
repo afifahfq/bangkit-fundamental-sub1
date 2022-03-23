@@ -6,16 +6,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 
-class DetailUser : AppCompatActivity() {
-
-    companion object {
-        const val EXTRA_USER = "extra_user"
-    }
-
+class DetailUserActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_user)
-        setTitle("Detail User");
+        setTitle("Detail User")
 
         val imageObject: ImageView = findViewById(R.id.imageView)
         val nameObject: TextView = findViewById(R.id.name_object)
@@ -28,7 +23,7 @@ class DetailUser : AppCompatActivity() {
 
         val user = intent.getParcelableExtra<User>(EXTRA_USER) as User
 
-        Glide.with(imageObject.getContext())
+        Glide.with(imageObject.context)
             .load(user.avatar)
             .circleCrop()
             .into(imageObject)
@@ -54,4 +49,9 @@ class DetailUser : AppCompatActivity() {
         val following = "${user.following}"
         followingObject.text = following
     }
+
+    companion object {
+        const val EXTRA_USER = "extra_user"
+    }
+
 }

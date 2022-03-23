@@ -22,7 +22,7 @@ class ListUserAdapter(private val listUsers: ArrayList<User>): RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val (username, name, location, repository, company, followers, following, photo) = listUsers[position]
-        Glide.with(holder.itemView.getContext())
+        Glide.with(holder.itemView.context)
             .load(photo)
             .circleCrop()
             .into(holder.imgPhoto);
