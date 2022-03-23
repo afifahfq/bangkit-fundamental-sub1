@@ -1,11 +1,13 @@
 <resources>
-    <string name="app_name">Github User</string>
+    <string name="app_name">Github User Search</string>
 
     <string name="users_name">Nama Pahlawan</string>
     <string name="description">Deskripsi</string>
     <string name="object_received" />
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="search">Search</string>
+    <string name="menu_1">Languages</string>
 
     <string-array name="username">
         <item>JakeWharton</item>
@@ -110,5 +112,8 @@
         <item>@drawable/user9</item>
         <item>@drawable/user10</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_hint">Masukkan username</string>
 
 </resources>
