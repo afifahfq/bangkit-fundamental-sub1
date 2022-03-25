@@ -1,4 +1,4 @@
-package com.example.githubuser
+package com.example.githubuser.Views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,9 +7,13 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.example.githubuser.Api.ApiConfig
+import com.example.githubuser.Models.DetailResponse
+import com.example.githubuser.Models.DetailUser
+import com.example.githubuser.R
+import com.example.githubuser.Models.User
 import com.example.githubuser.databinding.ActivityDetailUserBinding
 import com.example.githubuser.databinding.ActivityDetailUserBinding.inflate
-import com.example.githubuser.databinding.ActivityMainBinding
 import retrofit2.*
 
 class DetailUserActivity : AppCompatActivity() {
@@ -53,7 +57,7 @@ class DetailUserActivity : AppCompatActivity() {
             }
             override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
                 showLoading(false)
-                Log.e(DetailUserActivity.TAG, "onFailure: ${t.message}")
+                Log.e(TAG, "onFailure: ${t.message}")
             }
         })
     }

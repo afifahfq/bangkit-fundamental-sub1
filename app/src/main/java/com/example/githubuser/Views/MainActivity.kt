@@ -1,4 +1,4 @@
-package com.example.githubuser
+package com.example.githubuser.Views
 
 import android.app.SearchManager
 import android.content.Context
@@ -15,6 +15,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.githubuser.*
+import com.example.githubuser.Adapter.ListUserAdapter
+import com.example.githubuser.Api.ApiConfig
+import com.example.githubuser.Models.SearchResponse
+import com.example.githubuser.Models.User
 import com.example.githubuser.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
