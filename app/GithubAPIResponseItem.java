@@ -1,4 +1,4 @@
-public class ApiResponseItem{
+public class SearchResponseItem{
 	private String gistsUrl;
 	private String reposUrl;
 	private String followingUrl;

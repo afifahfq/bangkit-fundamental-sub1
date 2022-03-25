@@ -2,7 +2,7 @@ package com.example.githubuser
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiResponse(
+data class SearchResponse(
 
 	@field:SerializedName("total_count")
 	val totalCount: Int? = null,
@@ -11,10 +11,10 @@ data class ApiResponse(
 	val incompleteResults: Boolean? = null,
 
 	@field:SerializedName("items")
-	val items: List<UsersItem?>? = null
+	val items: List<UserItem?>? = null
 )
 
-data class UsersItem(
+data class UserItem(
 
 	@field:SerializedName("gists_url")
 	val gistsUrl: String? = null,

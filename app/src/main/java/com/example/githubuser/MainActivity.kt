@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,33 +41,28 @@ class MainActivity : AppCompatActivity() {
         list.clear()
 
         showLoading(true)
-        val client = ApiConfig.getApiService().searchUser(username)
-        client.enqueue(object : Callback<ApiResponse> {
+        val client = ApiConfig.getApiService().searchUsers(username)
+        client.enqueue(object : Callback<SearchResponse> {
             override fun onResponse(
-                call: Call<ApiResponse>,
-                response: Response<ApiResponse>
+                call: Call<SearchResponse>,
+                response: Response<SearchResponse>
             ) {
                 showLoading(false)
                 val responseBody = response.body()
                 if (responseBody != null) {
                     for (user in responseBody.items!!) {
-                        // ini baru asal assign saja yg penting tiap attribute di class User terisi
                         var curr = User(
                             user?.login,
                             user?.htmlUrl,
-                            user?.htmlUrl,
-                            user?.reposUrl,
-                            user?.htmlUrl,
-                            user?.followersUrl,
-                            user?.followingUrl,
-                            user?.avatarUrl )
+                            user?.avatarUrl
+                        )
                         list.add(curr)
                     }
                     Log.i("cekList", list.toString())
                     showRecyclerList()
                 }
             }
-            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+            override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
                 showLoading(false)
                 Log.e(TAG, "onFailure: ${t.message}")
             }

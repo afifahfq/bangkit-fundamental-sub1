@@ -21,14 +21,14 @@ class ListUserAdapter(private val listUsers: ArrayList<User>): RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val (username, name, location, repository, company, followers, following, photo) = listUsers[position]
+        val (username, url, photo) = listUsers[position]
         Glide.with(holder.itemView.context)
             .load(photo)
             .circleCrop()
             .into(holder.imgPhoto);
 
-        holder.tvUsername.text = name
-        holder.tvName.text = company
+        holder.tvUsername.text = username
+        holder.tvName.text = url
         holder.itemView.setOnClickListener {
             onItemClickCallback.onItemClicked(listUsers[holder.adapterPosition])
         }

@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".DetailUserActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -56,62 +68,11 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="20dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-        tools:layout_editor_absoluteX="40dp">
-
-        <TextView
-            android:id="@+id/follower_object"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toStartOf="@+id/following_object"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/following_object"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/follower_object"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/followers"
-            app:layout_constraintEnd_toEndOf="@+id/follower_object"
-            app:layout_constraintStart_toStartOf="@+id/follower_object"
-            app:layout_constraintTop_toBottomOf="@+id/follower_object" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/following"
-            app:layout_constraintEnd_toEndOf="@+id/following_object"
-            app:layout_constraintStart_toStartOf="@+id/following_object"
-            app:layout_constraintTop_toBottomOf="@+id/following_object" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/constraint1"
         tools:layout_editor_absoluteX="40dp">
 
         <TextView

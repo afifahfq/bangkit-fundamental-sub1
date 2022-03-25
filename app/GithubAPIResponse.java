@@ -1,7 +1,7 @@
-public class ApiResponse{
-	private List<ApiResponseItem> ApiResponse;
+public class SearchResponse{
+	private List<SearchResponseItem> SearchResponse;
 
-	public List<ApiResponseItem> getApiResponse(){
-		return ApiResponse;
+	public List<SearchResponseItem> getSearchResponse(){
+		return SearchResponse;
 	}
 }
