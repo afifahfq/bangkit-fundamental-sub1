@@ -7,21 +7,31 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.githubuser.databinding.ActivityMainBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var rvUsers: RecyclerView
     private val list = ArrayList<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //setContentView(R.layout.activity_main)
 
         rvUsers = findViewById(R.id.rv_users)
         rvUsers.setHasFixedSize(true)
@@ -39,12 +49,14 @@ class MainActivity : AppCompatActivity() {
             val dataCompany = resources.getStringArray(R.array.company)
             val dataFollowers = resources.getStringArray(R.array.followers)
             val dataFollowing = resources.getStringArray(R.array.following)
+            //val dataAvatar = resources.getStringArray(R.array.avatar)
             val dataAvatar = resources.obtainTypedArray(R.array.avatar)
             val listUser = ArrayList<User>()
             for (i in dataName.indices) {
+                //val user = User(dataUsername[i], dataName[i], dataLocation[i], dataRepository[i], dataCompany[i], dataFollowers[i],  dataFollowing[i], dataAvatar[i])
                 val user = User(dataUsername[i], dataName[i], dataLocation[i], dataRepository[i], dataCompany[i], dataFollowers[i],  dataFollowing[i], dataAvatar.getResourceId(i, -1))
                 listUser.add(user)
-        }
+            }
         return listUser
     }
 
@@ -99,5 +111,10 @@ class MainActivity : AppCompatActivity() {
             }
             else -> return true
         }
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
+        private const val USER_USERNAME = "afifahfq"
     }
 }
