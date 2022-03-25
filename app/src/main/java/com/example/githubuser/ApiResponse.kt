@@ -4,11 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class ApiResponse(
 
-	@field:SerializedName("ApiResponse")
-	val ApiResponse: List<ApiResponseItem?>? = null
+	@field:SerializedName("total_count")
+	val totalCount: Int? = null,
+
+	@field:SerializedName("incomplete_results")
+	val incompleteResults: Boolean? = null,
+
+	@field:SerializedName("items")
+	val items: List<UsersItem?>? = null
 )
 
-data class ApiResponseItem(
+data class UsersItem(
 
 	@field:SerializedName("gists_url")
 	val gistsUrl: String? = null,
@@ -36,6 +42,9 @@ data class ApiResponseItem(
 
 	@field:SerializedName("subscriptions_url")
 	val subscriptionsUrl: String? = null,
+
+	@field:SerializedName("score")
+	val score: Double? = null,
 
 	@field:SerializedName("received_events_url")
 	val receivedEventsUrl: String? = null,

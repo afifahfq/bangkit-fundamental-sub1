@@ -13,5 +13,5 @@ data class User(
     val company: String?,
     val followers: String?,
     val following: String?,
-    val avatar: Int?
+    val avatar: String?
 ): Parcelable
