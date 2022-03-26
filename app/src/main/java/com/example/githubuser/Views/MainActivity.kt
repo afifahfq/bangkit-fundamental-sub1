@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTitle("Github User's Search")
 
         rvUsers = findViewById(R.id.rv_users)
         rvUsers.setHasFixedSize(true)

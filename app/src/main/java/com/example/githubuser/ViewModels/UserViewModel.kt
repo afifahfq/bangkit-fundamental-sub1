@@ -52,7 +52,7 @@ class UserViewModel: ViewModel() {
         return mList
     }
 
-    fun getStatus(): LiveData<Boolean> {
+    fun getStatus(): MutableLiveData<Boolean> {
         return userViewModelStatus
     }
 }
