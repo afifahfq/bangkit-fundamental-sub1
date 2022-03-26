@@ -11,17 +11,22 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.StringRes
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.githubuser.*
 import com.example.githubuser.Adapter.ListUserAdapter
+import com.example.githubuser.Adapter.SectionsPagerAdapter
 import com.example.githubuser.Models.User
 import com.example.githubuser.ViewModels.UserViewModel
 import com.example.githubuser.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -40,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         mLiveDataList = ViewModelProvider(this)[UserViewModel::class.java]
         subscribe()
         mLiveDataList.findUsers(USER_USERNAME)
+
     }
 
     private fun subscribe() {
@@ -119,5 +125,10 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
         private const val USER_USERNAME = "sidiqpermana"
+        @StringRes
+        val TAB_TITLES = intArrayOf(
+            R.string.tab_text_1,
+            R.string.tab_text_2,
+        )
     }
 }
