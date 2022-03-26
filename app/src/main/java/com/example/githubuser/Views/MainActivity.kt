@@ -25,31 +25,32 @@ import com.example.githubuser.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-//    private lateinit var viewModel: UserViewModel
     private lateinit var mLiveDataList: UserViewModel
     private lateinit var rvUsers: RecyclerView
-    private var recyclerList = ArrayList<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //setContentView(R.layout.activity_main)
 
         rvUsers = findViewById(R.id.rv_users)
         rvUsers.setHasFixedSize(true)
 
-//        viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         mLiveDataList = ViewModelProvider(this)[UserViewModel::class.java]
         subscribe()
+        mLiveDataList.findUsers(USER_USERNAME)
     }
 
     private fun subscribe() {
         val listObserver = Observer<ArrayList<User>?> { aList ->
-            //recyclerList = aList
             showRecyclerList(aList)
         }
         mLiveDataList.getList().observe(this, listObserver)
+
+        val statusObserver = Observer<Boolean> { aStatus ->
+            showLoading(aStatus)
+        }
+        mLiveDataList.getStatus().observe(this, statusObserver)
     }
 
     private fun showRecyclerList(aList: ArrayList<User>) {
@@ -93,8 +94,6 @@ class MainActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String): Boolean {
                 //Toast.makeText(this@MainActivity, query, Toast.LENGTH_SHORT).show()
                 mLiveDataList.findUsers(query)
-                //showRecyclerList()
-                //Log.i("CEKIN", mLiveDataList.toString())
                 searchView.clearFocus()
                 return true
             }

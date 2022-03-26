@@ -13,7 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserViewModel: ViewModel() {
-    val userViewModelStatus = MutableLiveData<Int>()
+    val userViewModelStatus = MutableLiveData<Boolean>()
     val mList = MutableLiveData<ArrayList<User>>()
     val list = ArrayList<User>()
 
@@ -21,7 +21,7 @@ class UserViewModel: ViewModel() {
         list.clear()
         mList.postValue(list)
 
-        userViewModelStatus.value = 1
+        userViewModelStatus.postValue(true)
         val client = ApiConfig.getApiService().searchUsers(username)
         client.enqueue(object : Callback<SearchResponse> {
             override fun onResponse(
@@ -38,7 +38,7 @@ class UserViewModel: ViewModel() {
                         )
                         list.add(curr)
                     }
-                    Log.i("cekList", list.toString())
+                    userViewModelStatus.postValue(false)
                     mList.postValue(list)
                 }
             }
@@ -50,5 +50,9 @@ class UserViewModel: ViewModel() {
 
     fun getList(): LiveData<ArrayList<User>?> {
         return mList
+    }
+
+    fun getStatus(): LiveData<Boolean> {
+        return userViewModelStatus
     }
 }
