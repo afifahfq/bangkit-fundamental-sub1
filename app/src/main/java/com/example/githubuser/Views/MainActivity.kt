@@ -12,23 +12,23 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.*
 import com.example.githubuser.Adapter.ListUserAdapter
-import com.example.githubuser.Api.ApiConfig
-import com.example.githubuser.Models.SearchResponse
 import com.example.githubuser.Models.User
+import com.example.githubuser.ViewModels.UserViewModel
 import com.example.githubuser.databinding.ActivityMainBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+//    private lateinit var viewModel: UserViewModel
+    private lateinit var mLiveDataList: UserViewModel
     private lateinit var rvUsers: RecyclerView
-    private val list = ArrayList<User>()
+    private var recyclerList = ArrayList<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,49 +39,27 @@ class MainActivity : AppCompatActivity() {
         rvUsers = findViewById(R.id.rv_users)
         rvUsers.setHasFixedSize(true)
 
-        findUsers(USER_USERNAME)
+//        viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        mLiveDataList = ViewModelProvider(this)[UserViewModel::class.java]
+        subscribe()
     }
 
-    private fun findUsers(username: String) {
-        list.clear()
-
-        showLoading(true)
-        val client = ApiConfig.getApiService().searchUsers(username)
-        client.enqueue(object : Callback<SearchResponse> {
-            override fun onResponse(
-                call: Call<SearchResponse>,
-                response: Response<SearchResponse>
-            ) {
-                showLoading(false)
-                val responseBody = response.body()
-                if (responseBody != null) {
-                    for (user in responseBody.items!!) {
-                        var curr = User(
-                            user?.login,
-                            user?.htmlUrl,
-                            user?.avatarUrl
-                        )
-                        list.add(curr)
-                    }
-                    Log.i("cekList", list.toString())
-                    showRecyclerList()
-                }
-            }
-            override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-                showLoading(false)
-                Log.e(TAG, "onFailure: ${t.message}")
-            }
-        })
+    private fun subscribe() {
+        val listObserver = Observer<ArrayList<User>?> { aList ->
+            //recyclerList = aList
+            showRecyclerList(aList)
+        }
+        mLiveDataList.getList().observe(this, listObserver)
     }
 
-    private fun showRecyclerList() {
+    private fun showRecyclerList(aList: ArrayList<User>) {
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rvUsers.layoutManager = GridLayoutManager(this, 2)
         } else {
             rvUsers.layoutManager = LinearLayoutManager(this)
         }
 
-        val listUserAdapter = ListUserAdapter(list)
+        val listUserAdapter = ListUserAdapter(aList)
         rvUsers.adapter = listUserAdapter
 
         listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
@@ -114,7 +92,9 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 //Toast.makeText(this@MainActivity, query, Toast.LENGTH_SHORT).show()
-                findUsers(query)
+                mLiveDataList.findUsers(query)
+                //showRecyclerList()
+                //Log.i("CEKIN", mLiveDataList.toString())
                 searchView.clearFocus()
                 return true
             }
