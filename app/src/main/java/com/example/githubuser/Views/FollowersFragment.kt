@@ -3,13 +3,10 @@ package com.example.githubuser.Views
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,10 +17,10 @@ import com.example.githubuser.Models.User
 import com.example.githubuser.R
 import com.example.githubuser.ViewModels.UserViewModel
 
-class FollowFragment : Fragment() {
+class FollowersFragment : Fragment() {
+    private lateinit var rvHeroes: RecyclerView
     private lateinit var mLiveDataList: UserViewModel
-    private lateinit var rvUsers: RecyclerView
-    private lateinit var username: String
+    private val list = ArrayList<User>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,53 +31,47 @@ class FollowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View =  inflater.inflate(R.layout.fragment_follow, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_followers, container, false)
 
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        rvUsers = view.findViewById(R.id.rv_users)
-        rvUsers.setHasFixedSize(true)
-
-        username = arguments?.getString(ARG_USERNAME)!!
-        Log.i("cekpoin", username)
-
-//        val tvLabel: TextView = view.findViewById(R.id.section_label)
-//        val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
-//        tvLabel.text = index.toString()
+        rvHeroes = view.findViewById(R.id.rv_followers)
+        rvHeroes.setHasFixedSize(true)
 
         mLiveDataList = ViewModelProvider(this)[UserViewModel::class.java]
         subscribe()
-        mLiveDataList.findUsers(username)
-        Log.i("cekpoin", mLiveDataList.toString())
+        mLiveDataList.findUsers("sidiqpermana")
+
+        return view
     }
 
     private fun subscribe() {
         val listObserver = Observer<ArrayList<User>?> { aList ->
             showRecyclerList(aList)
         }
-        mLiveDataList.getList().observe(viewLifecycleOwner , listObserver)
+        mLiveDataList.getList().observe(viewLifecycleOwner, listObserver)
+
+        val statusObserver = Observer<Boolean> { aStatus ->
+            //showLoading(aStatus)
+        }
+        mLiveDataList.getStatus().observe(viewLifecycleOwner, statusObserver)
     }
 
     private fun showRecyclerList(aList: ArrayList<User>) {
-        rvUsers.layoutManager = LinearLayoutManager(activity)
+        rvHeroes.layoutManager = LinearLayoutManager(activity)
 
         val listUserAdapter = ListUserAdapter(aList)
-        rvUsers.adapter = listUserAdapter
+        rvHeroes.adapter = listUserAdapter
 
         listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: User) {
 
+                val detailUserIntent = Intent(activity, DetailUserActivity::class.java)
+                detailUserIntent.putExtra(DetailUserActivity.EXTRA_USER, data)
+                startActivity(detailUserIntent)
             }
-
         })
     }
 
     companion object {
-        const val ARG_SECTION_NUMBER = "section_number"
-        const val ARG_USERNAME = "afifahfq"
+
     }
 }
