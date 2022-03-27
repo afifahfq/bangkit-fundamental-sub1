@@ -1,5 +1,6 @@
 package com.example.githubuser.Adapter
 
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -11,18 +12,17 @@ import com.example.githubuser.Views.FollowersFragment
 import com.example.githubuser.Views.FollowingFragment
 import com.example.githubuser.Views.TabbedFragment
 
-class SectionsPagerAdapter(fragment: TabbedFragment) : FragmentStateAdapter(fragment)  {
-
+class SectionsPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment)  {
     override fun getItemCount(): Int {
         return 2
     }
 
     override fun createFragment(position: Int): Fragment {
-        var fragment: Fragment? = null
-        when (position) {
-            0 -> fragment = FollowersFragment()
-            1 -> fragment = FollowingFragment()
+        val fragment = FollowersFragment()
+        fragment.arguments = Bundle().apply {
+            putInt(FollowersFragment.ARG_SECTION_NUMBER, position + 1)
         }
-        return fragment as Fragment
+        return fragment
     }
+
 }

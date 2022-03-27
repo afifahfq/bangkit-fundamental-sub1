@@ -99,9 +99,11 @@ class DetailUserActivity : AppCompatActivity() {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
             binding.constraint2.visibility = View.GONE
+            binding.frameContainer.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.GONE
             binding.constraint2.visibility = View.VISIBLE
+            binding.frameContainer.visibility = View.VISIBLE
         }
     }
 
