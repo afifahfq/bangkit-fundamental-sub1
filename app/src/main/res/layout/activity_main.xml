@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Views.MainActivity">
 
-    <FrameLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:id="@+id/fragment_container" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"

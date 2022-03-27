@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".Views.FollowFragment">
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/content_tab_followers" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_users"
+        tools:listitem="@layout/item_row_user"
+        android:layout_width="409dp"
+        android:layout_height="0dp"/>
 
 </FrameLayout>
