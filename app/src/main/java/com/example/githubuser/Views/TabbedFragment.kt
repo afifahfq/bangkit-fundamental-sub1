@@ -1,6 +1,7 @@
 package com.example.githubuser.Views
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.githubuser.Adapter.SectionsPagerAdapter
+import com.example.githubuser.Models.DetailUser
+import com.example.githubuser.Models.User
 import com.example.githubuser.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -26,9 +29,19 @@ class TabbedFragment : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_tabbed, container, false)
 
-        // Inflate the layout for this fragment
+        // get username from DetailUserActivity
+        val bundle = arguments
+        val message = bundle!!.getString("mText")
+        Log.i("CEKMESSSAGE", message.toString())
+
+        // connect with pager adapter
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
         val viewPager: ViewPager2 = view.findViewById(R.id.view_pager)
+
+        // send username to follow fragment
+        sectionsPagerAdapter.username = message!!
+
+        // Inflate the layout for this fragment
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = view.findViewById(R.id.tabs)
         TabLayoutMediator(tabs, viewPager) { tab, position ->

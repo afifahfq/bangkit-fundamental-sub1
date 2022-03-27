@@ -1,26 +1,22 @@
 package com.example.githubuser.Views
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.View.inflate
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.example.githubuser.Adapter.SectionsPagerAdapter
 import com.example.githubuser.Models.DetailUser
-import com.example.githubuser.R
 import com.example.githubuser.Models.User
+import com.example.githubuser.R
 import com.example.githubuser.ViewModels.DetailViewModel
 import com.example.githubuser.databinding.ActivityDetailUserBinding
 import com.example.githubuser.databinding.ActivityDetailUserBinding.inflate
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailUserBinding
@@ -39,8 +35,18 @@ class DetailUserActivity : AppCompatActivity() {
         val user = intent.getParcelableExtra<DetailUser>(EXTRA_USER) as User
         mLiveDetailUser.findUserDetail(user.username)
 
+//        val detailUserIntent = Intent(this, DetailUserActivity::class.java)
+//        detailUserIntent.putExtra(DetailUserActivity.EXTRA_USER, user.username)
+
         val mFragmentManager = supportFragmentManager
         val mTabbedFragment = TabbedFragment()
+        val mFragmentTransaction = mFragmentManager.beginTransaction()
+
+        val mBundle = Bundle()
+        mBundle.putString("mText", user.username)
+        mTabbedFragment.arguments = mBundle
+        mFragmentTransaction.commit()
+
         val fragment = mFragmentManager.findFragmentByTag(TabbedFragment::class.java.simpleName)
         if (fragment !is TabbedFragment) {
             Log.d("MyFlexibleFragment", "Fragment Name :" + TabbedFragment::class.java.simpleName)
@@ -110,11 +116,6 @@ class DetailUserActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "DetailUserActivity"
         const val EXTRA_USER = "extra_user"
-        @StringRes
-        val TAB_TITLES = intArrayOf(
-            R.string.tab_text_1,
-            R.string.tab_text_2
-        )
     }
 
 }
