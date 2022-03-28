@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Views.DetailUserActivity">
 
-<<<<<<< Updated upstream
     <!--<ImageView
         android:id="@+id/iv_bookmark"
         android:layout_width="30dp"
@@ -19,8 +18,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />-->
 
-=======
->>>>>>> Stashed changes
     <ImageButton
         android:id="@+id/btn_favorite"
         android:tag="True"
@@ -28,15 +25,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-<<<<<<< Updated upstream
-        android:src="@drawable/ic_baseline_favorite_24_true"
-        style="?android:attr/borderlessButtonStyle"
-        android:contentDescription="@string/btn_favorite"
-=======
         android:src="@drawable/ic_baseline_favorite_border_24_false"
         style="?android:attr/borderlessButtonStyle"
         android:contentDescription="@string/favorite_desc"
->>>>>>> Stashed changes
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

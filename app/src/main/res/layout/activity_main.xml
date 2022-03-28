@@ -44,6 +44,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@drawable/ic_baseline_favorite_24"
-        android:contentDescription="@string/favorites"/>
+        android:contentDescription="@string/favorite_desc"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
