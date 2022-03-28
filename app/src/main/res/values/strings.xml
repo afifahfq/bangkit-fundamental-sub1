@@ -120,7 +120,11 @@
     <string name="tab_text_1">Followers</string>
     <string name="tab_text_2">Following</string>
     <string name="content_tab_text">This is Tab %1$d</string>
+<<<<<<< Updated upstream
     <string name="favorites">Favorites</string>
     <string name="btn_favorite">Favorite</string>
+=======
+    <string name="favorite_desc">Favorite Button</string>
+>>>>>>> Stashed changes
 
 </resources>
