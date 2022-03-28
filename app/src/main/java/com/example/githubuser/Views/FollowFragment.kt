@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.Adapter.ListUserAdapter
 import com.example.githubuser.Models.User
 import com.example.githubuser.R
-import com.example.githubuser.ViewModels.UserViewModel
+import com.example.githubuser.ViewModels.FollowViewModel
 
 class FollowFragment : Fragment() {
-    private lateinit var mLiveDataList: UserViewModel
+    private lateinit var mLiveDataList: FollowViewModel
     private lateinit var rvUsers: RecyclerView
     private lateinit var username: String
 
@@ -47,14 +47,12 @@ class FollowFragment : Fragment() {
 
         username = arguments?.getString(ARG_USERNAME)!!
         Log.i("cekpoin", username)
+        val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
+        Log.i("cekpoin", index.toString())
 
-//        val tvLabel: TextView = view.findViewById(R.id.section_label)
-//        val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
-//        tvLabel.text = index.toString()
-
-        mLiveDataList = ViewModelProvider(this)[UserViewModel::class.java]
+        mLiveDataList = ViewModelProvider(this)[FollowViewModel::class.java]
         subscribe()
-        mLiveDataList.findUsers(username)
+        mLiveDataList.findFollowers(username)
         Log.i("cekpoin", mLiveDataList.toString())
     }
 

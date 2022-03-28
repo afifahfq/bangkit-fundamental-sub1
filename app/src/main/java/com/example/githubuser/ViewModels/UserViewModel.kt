@@ -6,8 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.githubuser.Api.ApiConfig
-import com.example.githubuser.Models.SearchResponse
-import com.example.githubuser.Models.User
+import com.example.githubuser.Models.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
