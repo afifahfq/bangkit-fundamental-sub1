@@ -19,11 +19,13 @@ import com.example.githubuser.Adapter.ListUserAdapter
 import com.example.githubuser.Models.User
 import com.example.githubuser.R
 import com.example.githubuser.ViewModels.FollowViewModel
+import kotlin.properties.Delegates
 
 class FollowFragment : Fragment() {
     private lateinit var mLiveDataList: FollowViewModel
     private lateinit var rvUsers: RecyclerView
     private lateinit var username: String
+    private var index by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,21 +48,30 @@ class FollowFragment : Fragment() {
         rvUsers.setHasFixedSize(true)
 
         username = arguments?.getString(ARG_USERNAME)!!
-        Log.i("cekpoin", username)
-        val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
-        Log.i("cekpoin", index.toString())
+        index = requireArguments().getInt(ARG_SECTION_NUMBER, 0)
 
         mLiveDataList = ViewModelProvider(this)[FollowViewModel::class.java]
-        subscribe()
-        mLiveDataList.findFollowers(username)
-        Log.i("cekpoin", mLiveDataList.toString())
+        subscribe(index)
+        if (index == 2) {
+            mLiveDataList.findFollowing(username)
+        } else {
+            mLiveDataList.findFollowers(username)
+        }
+
     }
 
-    private fun subscribe() {
-        val listObserver = Observer<ArrayList<User>?> { aList ->
-            showRecyclerList(aList)
+    private fun subscribe(index: Int) {
+        if (index == 1) {
+            val followersObserver = Observer<ArrayList<User>?> { aList ->
+                showRecyclerList(aList)
+            }
+            mLiveDataList.getFollowers().observe(viewLifecycleOwner , followersObserver)
+        } else {
+            val followingObserver = Observer<ArrayList<User>?> { aList ->
+                showRecyclerList(aList)
+            }
+            mLiveDataList.getFollowing().observe(viewLifecycleOwner , followingObserver)
         }
-        mLiveDataList.getList().observe(viewLifecycleOwner , listObserver)
     }
 
     private fun showRecyclerList(aList: ArrayList<User>) {
@@ -71,9 +82,7 @@ class FollowFragment : Fragment() {
 
         listUserAdapter.setOnItemClickCallback(object : ListUserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: User) {
-
             }
-
         })
     }
 
