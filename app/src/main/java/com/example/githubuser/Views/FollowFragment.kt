@@ -88,6 +88,6 @@ class FollowFragment : Fragment() {
 
     companion object {
         const val ARG_SECTION_NUMBER = "section_number"
-        const val ARG_USERNAME = "afifahfq"
+        const val ARG_USERNAME = "sidiqpermana"
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.inflate
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.StringRes
@@ -106,10 +107,12 @@ class DetailUserActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.VISIBLE
             binding.constraint2.visibility = View.GONE
             binding.frameContainer.visibility = View.GONE
+            binding.btnFavorite.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.GONE
             binding.constraint2.visibility = View.VISIBLE
             binding.frameContainer.visibility = View.VISIBLE
+            binding.btnFavorite.visibility = View.VISIBLE
         }
     }
 
