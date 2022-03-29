@@ -6,8 +6,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,15 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.example.githubuser.*
 import com.example.githubuser.Adapter.ListUserAdapter
-import com.example.githubuser.Adapter.SectionsPagerAdapter
 import com.example.githubuser.Models.User
 import com.example.githubuser.ViewModels.UserViewModel
 import com.example.githubuser.databinding.ActivityMainBinding
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -119,7 +113,11 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu1 -> {
-                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+                //startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+
+                val settingsIntent = Intent(this, SettingActivity::class.java)
+                this.startActivity(settingsIntent)
+
                 return true
             }
             else -> return true

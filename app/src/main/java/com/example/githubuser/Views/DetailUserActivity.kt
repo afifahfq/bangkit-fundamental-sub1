@@ -1,13 +1,20 @@
 package com.example.githubuser.Views
 
+import android.app.SearchManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.View.inflate
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -112,11 +119,6 @@ class DetailUserActivity : AppCompatActivity() {
                 binding.btnFavorite.tag = "False"
                 favoriteStatus = false
                 binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24_false)
-
-                // nav to recycler view
-//                    val fragment: Fragment = BookmarkFragment()
-//                    val fragmentManager: FragmentManager = supportFragmentManager
-//                    fragmentManager.beginTransaction().replace(com.android72.perludilindungi.R.id.container, fragment).commit()
             }
         }
 
