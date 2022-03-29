@@ -32,7 +32,6 @@ class TabbedFragment : Fragment() {
         // get username from DetailUserActivity
         val bundle = arguments
         val message = bundle!!.getString("mText")
-        Log.i("CEKMESSSAGE", message.toString())
 
         // connect with pager adapter
         val sectionsPagerAdapter = SectionsPagerAdapter(this)

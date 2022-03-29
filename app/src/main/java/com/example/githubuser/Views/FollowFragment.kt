@@ -19,6 +19,7 @@ import com.example.githubuser.Adapter.ListUserAdapter
 import com.example.githubuser.Models.User
 import com.example.githubuser.R
 import com.example.githubuser.ViewModels.FollowViewModel
+import com.example.githubuser.databinding.FragmentFollowBinding
 import kotlin.properties.Delegates
 
 class FollowFragment : Fragment() {
@@ -26,6 +27,9 @@ class FollowFragment : Fragment() {
     private lateinit var rvUsers: RecyclerView
     private lateinit var username: String
     private var index by Delegates.notNull<Int>()
+
+    private var _binding: FragmentFollowBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,7 @@ class FollowFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view: View =  inflater.inflate(R.layout.fragment_follow, container, false)
+        _binding = FragmentFollowBinding.inflate(inflater, container, false)
 
         return view
     }
@@ -61,6 +66,11 @@ class FollowFragment : Fragment() {
     }
 
     private fun subscribe(index: Int) {
+        val statusObserver = Observer<Boolean> { aStatus ->
+            showLoading(aStatus)
+        }
+        mLiveDataList.getStatus().observe(viewLifecycleOwner, statusObserver)
+
         if (index == 1) {
             val followersObserver = Observer<ArrayList<User>?> { aList ->
                 showRecyclerList(aList)
@@ -84,6 +94,16 @@ class FollowFragment : Fragment() {
             override fun onItemClicked(data: User) {
             }
         })
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.rvUsers.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.rvUsers.visibility = View.VISIBLE
+        }
     }
 
     companion object {
