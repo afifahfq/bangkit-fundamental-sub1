@@ -64,21 +64,25 @@ class DetailUserActivity : AppCompatActivity() {
         mFavoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
         var favoriteStatus = false
-        mFavoriteViewModel.readAllData.observe(this) { bookmark ->
-            if (bookmark.any { b -> b.username == user.username }) {
+        mFavoriteViewModel.readAllData.observe(this) { favorite ->
+            if (favorite.any { b -> b.username == user.username }) {
                 // id udh ada di list bookmark
 
                 // cekwarning: true string or boolean
                 binding.btnFavorite.tag = "True"
                 favoriteStatus = true
+                binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_24_true)
+            }
+            else {
+                binding.btnFavorite.tag = "False"
+                favoriteStatus = false
                 binding.btnFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24_false)
-
             }
         }
 
         binding.btnFavorite.setOnClickListener {
-            mFavoriteViewModel.readAllData.observe(this) { bookmark ->
-                if (bookmark.any { b -> b.username == user.username }) {
+            mFavoriteViewModel.readAllData.observe(this) { favorite ->
+                if (favorite.any { b -> b.username == user.username }) {
 
                     // cekwarning: true string or boolean
                     binding.btnFavorite.tag = "True"
@@ -102,7 +106,7 @@ class DetailUserActivity : AppCompatActivity() {
             else {
                 // del from Database
                 mFavoriteViewModel.deleteFavorite(user.username!!)
-                Toast.makeText(this, "Successfully delete!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Successfully deleted!", Toast.LENGTH_LONG).show()
 
                 // cekwarning: true string or boolean
                 binding.btnFavorite.tag = "False"

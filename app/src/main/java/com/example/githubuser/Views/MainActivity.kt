@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setTitle("Github User's Search")
+        setTitle("Github Search User")
 
         rvUsers = findViewById(R.id.rv_users)
         rvUsers.setHasFixedSize(true)
@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         subscribe()
         mLiveDataList.findUsers(USER_USERNAME)
 
+        binding.fabAdd.setOnClickListener {
+            val myIntent = Intent(this, FavoriteActivity::class.java)
+            this.startActivity(myIntent)
+        }
     }
 
     private fun subscribe() {
