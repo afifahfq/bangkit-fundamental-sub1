@@ -101,14 +101,9 @@ class FollowFragment : Fragment() {
         if (isLoading) {
             val progressBar: ProgressBar = requireView().findViewById(R.id.progressBar)
             progressBar.visibility = View.VISIBLE
-//            view.findViewById(R.id.progressBar)
-//            binding.progressBar.visibility = View.VISIBLE
-//            binding.rvUsers.visibility = View.GONE
             val rvUsers: RecyclerView = requireView().findViewById(R.id.rv_users)
             rvUsers.visibility = View.GONE
         } else {
-//            binding.progressBar.visibility = View.GONE
-//            binding.rvUsers.visibility = View.VISIBLE
             val progressBar: ProgressBar = requireView().findViewById(R.id.progressBar)
             progressBar.visibility = View.GONE
             val rvUsers: RecyclerView = requireView().findViewById(R.id.rv_users)
