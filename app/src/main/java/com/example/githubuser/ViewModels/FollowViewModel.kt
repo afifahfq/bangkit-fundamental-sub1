@@ -24,13 +24,13 @@ class FollowViewModel: ViewModel() {
         mFollowers.postValue(followers)
 
         userViewModelStatus.postValue(true)
+        Log.i("CEKPOIN", userViewModelStatus.toString())
         val client = ApiConfig.getApiService().getFollowers(username)
         client.enqueue(object : Callback<List<FollowResponseItem>> {
             override fun onResponse(
                 call: Call<List<FollowResponseItem>>,
                 response: Response<List<FollowResponseItem>>
             ) {
-                Log.i("CEKPOIN", "MASUK")
                 val responseBody = response.body()
                 if (responseBody != null) {
                     for (user in responseBody) {
@@ -43,6 +43,7 @@ class FollowViewModel: ViewModel() {
                     }
                 }
                 userViewModelStatus.postValue(false)
+                Log.i("CEKPOIN2", userViewModelStatus.toString())
                 mFollowers.postValue(followers)
             }
             override fun onFailure(call: Call<List<FollowResponseItem>>, t: Throwable) {

@@ -21,6 +21,8 @@ class DetailViewModel: ViewModel() {
 
     fun findUserDetail(username: String?){
         detailViewModelStatus.postValue(true)
+        Log.i("CEKPOIN3", detailViewModelStatus.toString())
+
 
         val client = ApiConfig.getApiService().getUser(username!!)
         client.enqueue(object : Callback<DetailResponse> {
@@ -41,6 +43,7 @@ class DetailViewModel: ViewModel() {
                         responseBody.avatarUrl
                     )
                     detailViewModelStatus.postValue(false)
+                    Log.i("CEKPOIN4", detailViewModelStatus.toString())
                     mDetailUser.postValue(detailUser)
                 }
             }

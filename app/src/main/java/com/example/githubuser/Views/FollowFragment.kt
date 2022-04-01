@@ -1,18 +1,15 @@
 package com.example.githubuser.Views
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
+import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubuser.Adapter.ListUserAdapter
@@ -20,6 +17,7 @@ import com.example.githubuser.Models.User
 import com.example.githubuser.R
 import com.example.githubuser.ViewModels.FollowViewModel
 import com.example.githubuser.databinding.FragmentFollowBinding
+import com.google.android.material.tabs.TabLayout
 import kotlin.properties.Delegates
 
 class FollowFragment : Fragment() {
@@ -29,7 +27,7 @@ class FollowFragment : Fragment() {
     private var index by Delegates.notNull<Int>()
 
     private var _binding: FragmentFollowBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = requireView()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +68,7 @@ class FollowFragment : Fragment() {
             showLoading(aStatus)
         }
         mLiveDataList.getStatus().observe(viewLifecycleOwner, statusObserver)
+        Log.i("CEKLOADING", statusObserver.toString())
 
         if (index == 1) {
             val followersObserver = Observer<ArrayList<User>?> { aList ->
@@ -101,11 +100,20 @@ class FollowFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-            binding.rvUsers.visibility = View.GONE
+            val progressBar: ProgressBar = requireView().findViewById(R.id.progressBar)
+            progressBar.visibility = View.VISIBLE
+//            view.findViewById(R.id.progressBar)
+//            binding.progressBar.visibility = View.VISIBLE
+//            binding.rvUsers.visibility = View.GONE
+            val rvUsers: RecyclerView = requireView().findViewById(R.id.rv_users)
+            rvUsers.visibility = View.GONE
         } else {
-            binding.progressBar.visibility = View.GONE
-            binding.rvUsers.visibility = View.VISIBLE
+//            binding.progressBar.visibility = View.GONE
+//            binding.rvUsers.visibility = View.VISIBLE
+            val progressBar: ProgressBar = requireView().findViewById(R.id.progressBar)
+            progressBar.visibility = View.GONE
+            val rvUsers: RecyclerView = requireView().findViewById(R.id.rv_users)
+            rvUsers.visibility = View.VISIBLE
         }
     }
 
